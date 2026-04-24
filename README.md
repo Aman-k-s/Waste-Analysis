@@ -1,6 +1,6 @@
 # EcoSync Insights
 
-This repo now deploys cleanly with `Node/npm` for the frontend build and `Django + Gunicorn` for the runtime.
+This repo is set up for `Node/npm` frontend builds and `Django + Gunicorn` runtime deployment.
 
 ## Local development
 
@@ -52,5 +52,5 @@ Set these environment variables in Coolify:
 
 ## Notes
 
-- Bun lockfiles have been removed from the deployment path so Coolify will use the Node/npm workflow.
-- The frontend and backend now run behind the same origin in production, so the existing `/api/...` calls continue to work without extra frontend environment variables.
+- Bun lockfiles are not part of the deployment path, so Coolify will use the Node/npm workflow.
+- The frontend and backend run behind the same origin in production, so the existing `/api/...` calls continue to work without extra frontend environment variables.
