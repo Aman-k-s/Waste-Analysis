@@ -1,1 +1,7 @@
 backend/.env
+backend/frontend_dist/
+backend/staticfiles/
+backend/__pycache__/
+backend/**/*.pyc
+node_modules/
+dist/
