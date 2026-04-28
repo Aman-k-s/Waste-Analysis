@@ -1,0 +1,42 @@
+[
+  {
+    "question": "What is the total waste recorded?",
+    "intent": "total_waste"
+  },
+  {
+    "question": "How many waste scans have been recorded?",
+    "intent": "total_scans"
+  },
+  {
+    "question": "What is the average daily waste?",
+    "intent": "average_daily_waste"
+  },
+  {
+    "question": "Which food item is wasted the most?",
+    "intent": "most_wasted_food"
+  },
+  {
+    "question": "Which meal time generates the highest waste?",
+    "intent": "peak_waste_meal"
+  },
+  {
+    "question": "What is the breakdown of waste by category?",
+    "intent": "waste_category_breakdown"
+  },
+  {
+    "question": "How has waste trended over time?",
+    "intent": "waste_trend"
+  },
+  {
+    "question": "Which days had unusually high waste?",
+    "intent": "anomaly_days"
+  },
+  {
+    "question": "What is the total waste for this week?",
+    "intent": "current_week_total"
+  },
+  {
+    "question": "Which device generated the most waste?",
+    "intent": "top_device"
+  }
+]
