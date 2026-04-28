@@ -1,0 +1,11 @@
+.git
+.gitignore
+node_modules
+dist
+backend/.env
+backend/frontend_dist
+backend/staticfiles
+**/__pycache__
+**/*.pyc
+bun.lock
+bun.lockb
