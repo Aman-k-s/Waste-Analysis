@@ -36,7 +36,7 @@ export default function ChatBar({ filters }: ChatBarProps) {
     setLoading(true);
     setError("");
     try {
-      const response = await dashboardApi.askChat(finalQuestion, "gemini", filters);
+      const response = await dashboardApi.askChat(finalQuestion, "local", filters);
       setAnswer(response.answer);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Chat request failed.");
@@ -61,9 +61,6 @@ export default function ChatBar({ filters }: ChatBarProps) {
               </option>
             ))}
           </select>
-        </div>
-        <div className="h-9 rounded border border-border bg-card px-3 text-sm text-foreground flex items-center shrink-0">
-          Gemini
         </div>
         <button
           onClick={() => void submitQuestion()}
