@@ -1,4 +1,4 @@
-import { useState } from "react";
+import * as React from "react";
 import { Loader2, Send } from "lucide-react";
 
 import { dashboardApi, type DashboardFilters } from "@/lib/dashboard";
@@ -24,11 +24,10 @@ interface ChatBarProps {
 
 
 export default function ChatBar({ filters }: ChatBarProps) {
-  const [question, setQuestion] = useState(PRESET_QUESTIONS[0]);
-  const [provider, setProvider] = useState<"local" | "gemini">("local");
-  const [answer, setAnswer] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [question, setQuestion] = React.useState(PRESET_QUESTIONS[0]);
+  const [answer, setAnswer] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState("");
 
   async function submitQuestion(selectedQuestion?: string) {
     const finalQuestion = (selectedQuestion ?? question).trim();
@@ -37,7 +36,7 @@ export default function ChatBar({ filters }: ChatBarProps) {
     setLoading(true);
     setError("");
     try {
-      const response = await dashboardApi.askChat(finalQuestion, provider, filters);
+      const response = await dashboardApi.askChat(finalQuestion, "gemini", filters);
       setAnswer(response.answer);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Chat request failed.");
@@ -63,14 +62,9 @@ export default function ChatBar({ filters }: ChatBarProps) {
             ))}
           </select>
         </div>
-        <select
-          value={provider}
-          onChange={(event) => setProvider(event.target.value as "local" | "gemini")}
-          className="h-9 rounded border border-border bg-card px-2 text-sm text-foreground"
-        >
-          <option value="local">Local</option>
-          <option value="gemini">Gemini</option>
-        </select>
+        <div className="h-9 rounded border border-border bg-card px-3 text-sm text-foreground flex items-center shrink-0">
+          Gemini
+        </div>
         <button
           onClick={() => void submitQuestion()}
           className="h-9 w-9 flex items-center justify-center rounded bg-primary text-primary-foreground hover:bg-primary/90 transition-colors shrink-0"
