@@ -1,0 +1,12 @@
+[33m7b651fd4[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m refs/remotes/origin/main@{0}: update by push
+[33m7b651fd4[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m refs/heads/main@{0}: commit: Stop tracking local Codex log files
+[33m7b651fd4[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m HEAD@{0}: commit: Stop tracking local Codex log files
+[33m070d92cf[m refs/remotes/origin/main@{1}: update by push
+[33m070d92cf[m refs/heads/main@{1}: commit: Apply local dashboard and Coolify sync changes
+[33m070d92cf[m HEAD@{1}: commit: Apply local dashboard and Coolify sync changes
+[33mb1bbe64d[m[33m ([m[1;32mbackup-before-fix[m[33m)[m refs/heads/backup-before-fix@{0}: branch: Created from main
+[33m73b5d0b2[m refs/heads/main@{2}: reset: moving to origin/main
+[33m73b5d0b2[m HEAD@{2}: reset: moving to origin/main
+[33m73b5d0b2[m refs/remotes/origin/main@{2}: pull origin main: storing head
+[33mb1bbe64d[m[33m ([m[1;32mbackup-before-fix[m[33m)[m refs/heads/main@{3}: commit (initial): changes
+[33mb1bbe64d[m[33m ([m[1;32mbackup-before-fix[m[33m)[m HEAD@{3}: commit (initial): changes

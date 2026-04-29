@@ -46,12 +46,12 @@ export default function Index() {
         <div className="px-8 pt-6 pb-4 border-b border-border bg-card">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-xl font-bold text-foreground">Waste Monitoring Analysis</h1>
+              <h1 className="text-xl font-bold text-foreground">Waste Analysis</h1>
               <p className="text-sm text-muted-foreground mt-0.5">Real-time food waste intelligence dashboard</p>
             </div>
             <div className="flex items-center gap-2 text-xs text-muted-foreground">
               <span className="inline-block w-2 h-2 rounded-full bg-primary animate-pulse" />
-              EcoSync AI
+              Waste Analysis
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 # Django Backend
 
-This backend exposes analytics APIs for the waste dashboard without exposing the raw MySQL schema.
+This backend exposes analytics APIs for the Waste Analysis dashboard without exposing the raw MySQL schema directly to the frontend.
 
 ## Run
 
@@ -14,7 +14,30 @@ If `MYSQL_NAME` is not set, Django falls back to SQLite for local bootstrapping 
 
 ## Environment
 
-Copy `.env.example` into your shell environment or your preferred env loader and point it at the production-dump MySQL database.
+App database connection:
+
+- `MYSQL_NAME`
+- `MYSQL_USER`
+- `MYSQL_PASSWORD`
+- `MYSQL_HOST`
+- `MYSQL_PORT`
+- `WASTE_SCAN_TABLE`
+- `WASTE_COMPANY_ID`
+
+Optional production source sync connection:
+
+- `PROD_SYNC_HOST`
+- `PROD_SYNC_PORT`
+- `PROD_SYNC_NAME`
+- `PROD_SYNC_USER`
+- `PROD_SYNC_PASSWORD`
+- `PROD_SYNC_SOURCE_TABLE`
+- `PROD_SYNC_TARGET_TABLE`
+- `PROD_SYNC_CURSOR_COLUMN`
+- `PROD_SYNC_COMPANY_ID`
+- `PROD_SYNC_BATCH_SIZE`
+- `PROD_SYNC_INITIAL_CURSOR`
+- `PROD_SYNC_JOB_NAME`
 
 ## Endpoints
 
@@ -22,10 +45,20 @@ Copy `.env.example` into your shell environment or your preferred env loader and
 - `GET /api/waste-by-category`
 - `GET /api/reason-breakdown?category=Rice`
 - `GET /api/moisture-data?limit=250`
+- `GET /health/`
 
-## Supported Filters
+## Scheduled sync
 
-- `date_from=2026-03-01`
-- `date_to=2026-03-31`
-- `device=D3`
-- `week=2026-W13`
+Preview the approved source query without reading production:
+
+```bash
+python manage.py sync_prod_snapshot --preview
+```
+
+Run the sync:
+
+```bash
+python manage.py sync_prod_snapshot
+```
+
+The command reads from the production source DB with read-only credentials, upserts into the dashboard DB table, and records sync progress in `analytics_sync_state`.

@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 
 from analytics.services.filters import FilterParams
 from django.db import connection
@@ -92,6 +93,20 @@ def _fetch_all(sql: str, params: list) -> list[dict]:
 def _fetch_one(sql: str, params: list) -> dict:
     rows = _fetch_all(sql, params)
     return rows[0] if rows else {}
+
+
+def _iso_week_bounds(year_no: int, week_no: int) -> tuple[datetime.date, datetime.date]:
+    week_start = datetime.fromisocalendar(int(year_no), int(week_no), 1).date()
+    week_end = datetime.fromisocalendar(int(year_no), int(week_no), 7).date()
+    return week_start, week_end
+
+
+def _format_week_label(start_date, end_date) -> str:
+    if start_date.year == end_date.year:
+        if start_date.month == end_date.month:
+            return f"{start_date.strftime('%b %d')} - {end_date.strftime('%d, %Y')}"
+        return f"{start_date.strftime('%b %d')} - {end_date.strftime('%b %d, %Y')}"
+    return f"{start_date.strftime('%b %d, %Y')} - {end_date.strftime('%b %d, %Y')}"
 
 
 def get_dashboard_summary(filters: FilterParams) -> dict:
@@ -290,16 +305,19 @@ def get_weekly_waste(filters: FilterParams) -> list[dict]:
         ORDER BY year_no ASC, week_no ASC
     """
     rows = _fetch_all(sql, params)
-    return [
-        {
-            "week": f"{row['start_date'].strftime('%b %d')} - {row['end_date'].strftime('%b %d')}",
-            "value": float(row["value"] or 0),
-            "week_value": f"{row['year_no']}-W{int(row['week_no']):02d}",
-            "start_date": row["start_date"].isoformat(),
-            "end_date": row["end_date"].isoformat(),
-        }
-        for row in rows
-    ]
+    weekly_rows = []
+    for row in rows:
+        week_start, week_end = _iso_week_bounds(row['year_no'], row['week_no'])
+        weekly_rows.append(
+            {
+                "week": _format_week_label(week_start, week_end),
+                "value": float(row["value"] or 0),
+                "week_value": f"{row['year_no']}-W{int(row['week_no']):02d}",
+                "start_date": week_start.isoformat(),
+                "end_date": week_end.isoformat(),
+            }
+        )
+    return weekly_rows
 
 
 def get_waste_by_weekday(filters: FilterParams) -> list[dict]:
@@ -376,9 +394,10 @@ def get_weekday_comparison_grid(filters: FilterParams, weeks: list[str]) -> dict
 
     for row in rows:
         week_value = f"{row['year_no']}-W{int(row['week_no']):02d}"
+        week_start, week_end = _iso_week_bounds(row['year_no'], row['week_no'])
         week_meta[week_value] = {
             "value": week_value,
-            "label": f"{row['start_date'].strftime('%b %d, %Y')} - {row['end_date'].strftime('%b %d, %Y')}",
+            "label": _format_week_label(week_start, week_end),
         }
         day_values[short_names[row["day_name"]]][week_value] = float(row["value"] or 0)
 
@@ -471,7 +490,7 @@ def get_filter_options() -> dict:
         "categories": categories,
         "weeks": [
             {
-                "label": f"{week['week']} ({week['week_value'].split('-W')[0]})",
+                "label": week["week"],
                 "value": week["week_value"],
                 "start_date": week["start_date"],
                 "end_date": week["end_date"],
