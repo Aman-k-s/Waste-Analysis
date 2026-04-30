@@ -115,6 +115,8 @@ function MultiSelectDropdown({
 }
 
 
+const DASHBOARD_DEVICE_OPTIONS = ["AGFW26010", "CFSO13"];
+
 interface FilterSidebarProps {
   options?: FilterOptions;
   onApply: (filters: DashboardFilters) => void;
@@ -133,13 +135,13 @@ export default function FilterSidebar({ options, onApply }: FilterSidebarProps) 
     if (!options) return;
     setDateFrom(undefined);
     setDateTo(undefined);
-    setDevices([]);
+    setDevices(DASHBOARD_DEVICE_OPTIONS);
     setMeals([]);
     setCategories([]);
     setWeeks([]);
   }, [options]);
 
-  const deviceOptions = useMemo<DropdownOption[]>(() => (options?.devices ?? []).map((item) => ({ label: item, value: item })), [options?.devices]);
+  const deviceOptions = useMemo<DropdownOption[]>(() => DASHBOARD_DEVICE_OPTIONS.map((item) => ({ label: item, value: item })), []);
   const mealOptions = useMemo<DropdownOption[]>(() => (options?.meal_types ?? []).map((item) => ({ label: item, value: item })), [options?.meal_types]);
   const categoryOptions = useMemo<DropdownOption[]>(() => (options?.categories ?? []).map((item) => ({ label: item, value: item })), [options?.categories]);
   const weekOptions = useMemo<DropdownOption[]>(() => (options?.weeks ?? []).map((item) => ({ label: item.label, value: item.value })), [options?.weeks]);
@@ -160,7 +162,7 @@ export default function FilterSidebar({ options, onApply }: FilterSidebarProps) 
     onApply({
       dateFrom: finalDateFrom,
       dateTo: finalDateTo,
-      devices,
+      devices: devices.length ? devices : DASHBOARD_DEVICE_OPTIONS,
       mealTypes: meals,
       categories,
       weeks,
@@ -170,12 +172,12 @@ export default function FilterSidebar({ options, onApply }: FilterSidebarProps) 
   const reset = () => {
     setDateFrom(undefined);
     setDateTo(undefined);
-    setDevices([]);
+    setDevices(DASHBOARD_DEVICE_OPTIONS);
     setMeals([]);
     setCategories([]);
     setWeeks([]);
     onApply({
-      devices: [],
+      devices: DASHBOARD_DEVICE_OPTIONS,
       mealTypes: [],
       categories: [],
       weeks: [],

@@ -1,4 +1,4 @@
-import { Clock3, Utensils, Weight, Wind } from "lucide-react";
+import { Clock3, IndianRupee, Utensils, Weight } from "lucide-react";
 
 import type { DashboardSummary } from "@/lib/dashboard";
 

@@ -29,8 +29,10 @@ ALLOWED_KEYWORDS = {
     "anomaly",
     "week",
     "weekday",
-    "co2",
-    "carbon",
+    "cost",
+    "rupee",
+    "rupees",
+    "inr",
     "kg",
     "dashboard",
     "plate",
@@ -124,7 +126,7 @@ def _answer_from_intent(intent: str, context: dict[str, Any]) -> str | None:
 
 def _local_answer(question: str, context: dict[str, Any]) -> str:
     if not _is_dashboard_question(question):
-        return "I can answer only dashboard-related questions about waste, scans, meals, categories, devices, CO2, trends, and anomalies."
+        return "I can answer only dashboard-related questions about waste, scans, meals, categories, devices, cost, trends, and anomalies."
 
     lowered = question.lower()
     for faq in _load_faqs():
@@ -169,8 +171,8 @@ def _local_answer(question: str, context: dict[str, Any]) -> str:
         return f"The daily waste trend spans from {first_day['date']} to {last_day['date']}. Latest recorded waste is {last_day['value']:.2f} kg."
     if "anomaly" in lowered:
         return f"There are {summary['abnormal_days']} anomaly days in the current filtered range."
-    if "co2" in lowered or "carbon" in lowered:
-        return f"Total CO2 wasted is {summary['co2_impact']:.2f} kg (total waste multiplied by 39.5)."
+    if "cost" in lowered or "rupee" in lowered or "rupees" in lowered or "inr" in lowered:
+        return f"Total cost is Rs {summary['co2_impact']:.2f} for the current filters."
     if "insight" in lowered and insights["key_insights"]:
         return insights["key_insights"][0]
 

@@ -1,4 +1,4 @@
-import { Bar, BarChart, CartesianGrid, Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 import MealTypeBreakdown from "@/components/dashboard/MealTypeBreakdown";
 import type { DashboardFilters, NamedValue } from "@/lib/dashboard";
@@ -20,38 +20,21 @@ export default function CoreAnalysis({ filters, foodItems, wasteCategories, topD
 
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-2 gap-4">
-        <div className="chart-card">
-          <h3 className="section-title">Most Wasted Food</h3>
-          <ResponsiveContainer width="100%" height={280}>
-            <BarChart data={topFoodItems} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="hsl(220,13%,90%)" />
-              <XAxis dataKey="name" tick={{ fontSize: 11 }} interval={0} angle={-15} textAnchor="end" height={60} />
-              <YAxis tick={{ fontSize: 11 }} />
-              <Tooltip contentStyle={{ fontSize: 12, borderRadius: 4 }} />
-              <Bar dataKey="value" radius={[3, 3, 0, 0]}>
-                {topFoodItems.map((_, index) => (
-                  <Cell key={index} fill={COLORS[index % COLORS.length]} />
-                ))}
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-
-        <div className="chart-card">
-          <h3 className="section-title">Waste by Category</h3>
-          <ResponsiveContainer width="100%" height={280}>
-            <PieChart>
-              <Pie data={wasteCategories} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={105} innerRadius={55} paddingAngle={2}>
-                {wasteCategories.map((_, index) => (
-                  <Cell key={index} fill={COLORS[index % COLORS.length]} />
-                ))}
-              </Pie>
-              <Tooltip contentStyle={{ fontSize: 12, borderRadius: 4 }} />
-              <Legend iconSize={10} wrapperStyle={{ fontSize: 12 }} />
-            </PieChart>
-          </ResponsiveContainer>
-        </div>
+      <div className="chart-card">
+        <h3 className="section-title">Most Wasted Food</h3>
+        <ResponsiveContainer width="100%" height={280}>
+          <BarChart data={topFoodItems} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="hsl(220,13%,90%)" />
+            <XAxis dataKey="name" tick={{ fontSize: 11 }} interval={0} angle={-15} textAnchor="end" height={60} />
+            <YAxis tick={{ fontSize: 11 }} />
+            <Tooltip contentStyle={{ fontSize: 12, borderRadius: 4 }} />
+            <Bar dataKey="value" radius={[3, 3, 0, 0]}>
+              {topFoodItems.map((_, index) => (
+                <Cell key={index} fill={COLORS[index % COLORS.length]} />
+              ))}
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
       </div>
 
       <div className="grid grid-cols-2 gap-4">

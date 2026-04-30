@@ -16,8 +16,9 @@ import type { DashboardFilters } from "@/lib/dashboard";
 
 export default function Index() {
   const { data: filterOptions } = useDashboardFilterOptions();
+  const dashboardDevices = ["AGFW26010", "CFSO13"];
   const [appliedFilters, setAppliedFilters] = useState<DashboardFilters>({
-    devices: [],
+    devices: dashboardDevices,
     mealTypes: [],
     categories: [],
     weeks: [],
@@ -26,7 +27,7 @@ export default function Index() {
   useEffect(() => {
     if (!filterOptions) return;
     setAppliedFilters({
-      devices: [],
+      devices: dashboardDevices,
       mealTypes: [],
       categories: [],
       weeks: [],
@@ -74,7 +75,7 @@ export default function Index() {
 
           <TrendAnalysis trend={dashboard.trend} />
 
-          <TimeAnalysis filters={filters} options={filterOptions} weeklyWaste={dashboard.weeklyWaste} />
+          <TimeAnalysis filters={filters} options={filterOptions} />
 
           <AlertsAnomalies foodItems={dashboard.foodItems} wasteCategories={dashboard.wasteCategories} anomalies={dashboard.anomalies} />
 

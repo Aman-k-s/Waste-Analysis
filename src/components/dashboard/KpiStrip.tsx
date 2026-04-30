@@ -1,4 +1,4 @@
-import { AlertTriangle, Cpu, Leaf, Scale, ScanLine, Wind } from "lucide-react";
+import { AlertTriangle, Cpu, IndianRupee, Leaf, Scale, ScanLine } from "lucide-react";
 
 import type { DashboardSummary } from "@/lib/dashboard";
 
