@@ -26,11 +26,9 @@ export default function Index() {
   useEffect(() => {
     if (!filterOptions) return;
     setAppliedFilters({
-      dateFrom: filterOptions.min_date ?? undefined,
-      dateTo: filterOptions.max_date ?? undefined,
-      devices: filterOptions.devices,
-      mealTypes: filterOptions.meal_types,
-      categories: filterOptions.categories,
+      devices: [],
+      mealTypes: [],
+      categories: [],
       weeks: [],
     });
   }, [filterOptions]);

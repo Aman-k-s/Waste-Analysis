@@ -131,11 +131,11 @@ export default function FilterSidebar({ options, onApply }: FilterSidebarProps) 
 
   useEffect(() => {
     if (!options) return;
-    setDateFrom(options.min_date ? new Date(options.min_date) : undefined);
-    setDateTo(options.max_date ? new Date(options.max_date) : undefined);
-    setDevices(options.devices);
-    setMeals(options.meal_types);
-    setCategories(options.categories);
+    setDateFrom(undefined);
+    setDateTo(undefined);
+    setDevices([]);
+    setMeals([]);
+    setCategories([]);
     setWeeks([]);
   }, [options]);
 
@@ -168,18 +168,16 @@ export default function FilterSidebar({ options, onApply }: FilterSidebarProps) 
   };
 
   const reset = () => {
-    setDateFrom(options?.min_date ? new Date(options.min_date) : undefined);
-    setDateTo(options?.max_date ? new Date(options.max_date) : undefined);
-    setDevices(options?.devices ?? []);
-    setMeals(options?.meal_types ?? []);
-    setCategories(options?.categories ?? []);
+    setDateFrom(undefined);
+    setDateTo(undefined);
+    setDevices([]);
+    setMeals([]);
+    setCategories([]);
     setWeeks([]);
     onApply({
-      dateFrom: options?.min_date ?? undefined,
-      dateTo: options?.max_date ?? undefined,
-      devices: options?.devices ?? [],
-      mealTypes: options?.meal_types ?? [],
-      categories: options?.categories ?? [],
+      devices: [],
+      mealTypes: [],
+      categories: [],
       weeks: [],
     });
   };
