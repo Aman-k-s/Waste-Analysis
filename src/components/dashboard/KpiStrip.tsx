@@ -15,7 +15,7 @@ export default function KpiStrip({ summary }: KpiStripProps) {
     { label: "Average Daily Waste", value: `${(summary?.average_daily_waste ?? 0).toLocaleString()} kg`, icon: Leaf, color: "text-primary" },
     { label: "Total Devices", value: (summary?.total_devices ?? 0).toString(), icon: Cpu, color: "text-primary" },
     { label: "Abnormal Days", value: (summary?.abnormal_days ?? 0).toString(), icon: AlertTriangle, color: "text-destructive" },
-    { label: "Total CO₂ Wasted", value: `${(summary?.co2_impact ?? 0).toLocaleString()} kg`, icon: Wind, color: "text-accent" },
+    { label: "Total Cost", value: `Rs ${(summary?.co2_impact ?? 0).toLocaleString()}`, icon: IndianRupee, color: "text-accent" },
   ];
 
   return (
